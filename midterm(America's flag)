@@ -15,17 +15,16 @@ flag_h = 400
 circle_x = flag_w/4
 circle_y = flag_h/4
 
---背景
-
--- 先畫背景紅
+-- 先畫滿地紅
 ctx.fillStyle='rgb(255, 0, 0)'
 ctx:fillRect(0, 0, flag_w, flag_h)
 
--- 再畫背景藍
+-- 再畫青天
 ctx.fillStyle='rgb(0, 0, 150)'
 ctx:fillRect(0, 0, flag_w/2, flag_h/2)
 
---白線
+--利用白長線蓋紅
+
 --第一條白線
 ctx.fillStyle= '#fff'
 ctx:fillRect(300, 20, flag_w, flag_h/12)
@@ -52,6 +51,18 @@ ctx:fillRect(0, 340, flag_w, flag_h/12)
 
 --星星
 
+-- 導入 "js" 模組
+local js = require "js"
+-- global 就是 javascript 的 window
+local global = js.global
+local document = global.document
+-- html 檔案中 canvas　id 設為 "canvas"
+-- 準備繪圖畫布
+local canvas = document:getElementById("canvas")
+-- 將 ctx 設為 canvas 2d 繪圖畫布變數
+ctx = canvas:getContext("2d")
+
+
 -- 準備在 canvas 中繪圖
 function draw_line(x1, y1, x2, y2, color)
     color = color or "red"
@@ -61,8 +72,12 @@ function draw_line(x1, y1, x2, y2, color)
     ctx.strokeStyle = color
     ctx:stroke()
 end
--- x, y 為中心,  r 為半徑, angle 旋轉角, solid 空心或實心,  color 顏色
-    function star(x, y, r, angle, solid, color)
+
+-- x, y 為中心,  r 為半徑, angle 旋轉角,  solid 空心或實心,  color 顏色
+function star(x, y, r, angle, solid, color)
+    angle = angle or 0
+    solid = solid or false
+    color = color or "#fff"
     -- 以 x, y 為圓心, 計算五個外點
     local deg = math.pi/180
     -- 圓心到水平線距離
@@ -110,57 +125,17 @@ end
     end
 end
 
---第一行星星
+--i平行間隔 j垂直間隔(1~5排)
 for i = 0, 5 do
-    for j = 0, 0 do
-        star(18+50*i, 10+20*j, 10, 0, true, " #fff")
+    for j = 0, 4 do
+--調整間距的距離
+        star(18+50*i, 10+40*j, 10, 0, true, " #fff")
     end
 end
---第二行星星
-for i = 1, 5 do
-    for j = 1, 1 do
-         star(-13+52*i, 10+20*j, 10, 0, true, " #fff")
+--i平行間隔 j垂直間隔(1~5列)
+for i = 0, 5 do
+    for j = 0, 3 do
+--調整間距的距離
+        star(-13+52*i, 28+42*j, 10, 0, true, " #fff")
     end
 end
---第三行星星
-for i = 0, 5 do
-    for j = 2, 2 do
-        star(18+50*i, 10+20*j, 10, 0, true, " #fff")
-    end
-end  
---第四行星星
-for i = 1, 5 do
-    for j = 3, 3 do
-         star(-13+52*i, 10+20*j, 10, 0, true, " #fff")
-    end
-end
---第五行星星
-for i = 0, 5 do
-    for j = 4, 4 do
-        star(18+50*i, 10+20*j, 10, 0, true, " #fff")
-    end
-end  
---第六行星星
-for i = 1, 5 do
-    for j = 5, 5 do
-         star(-13+52*i, 10+20*j, 10, 0, true, " #fff")
-    end
-end
---第七行星星
-for i = 0, 5 do
-    for j = 6, 6 do
-        star(18+50*i, 10+20*j, 10, 0, true, " #fff")
-    end
-end  
---第八行星星
-for i = 1, 5 do
-    for j = 7, 7 do
-         star(-13+52*i, 10+20*j, 10, 0, true, " #fff")
-    end
-end
---第九行星星
-for i = 0, 5 do
-    for j = 8, 8 do
-        star(18+50*i, 15+20*j, 10, 0, true, " #fff")
-    end
-end  
