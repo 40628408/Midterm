@@ -55,11 +55,13 @@ ctx.fillStyle= '#fff'
 ctx:fillRect(0, 0, flag_w/2, flag_h/3)
 
 
---中間圓
+--中間圓蓋住
 ctx.fillStyle= '#191970'
 star(40, 200, 200, 40)
 ctx:closePath()
 ctx:fill()
+
+--以下是利用正方形連起來蓋住圓形形成長方型
 
 --中間白色
 ctx.fillStyle= '#fff'
