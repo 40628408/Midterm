@@ -31,3 +31,5 @@ tonumber()
 print("...")
 --數學函式(a)到(b)
 math.cos(a),math.sin(a)
+
+--以上是依照#11LUA程式依序翻譯個關鍵字以及函式
